@@ -2,20 +2,30 @@ package com.exemplo;
 
 
 public class Conta {
-    private String numero;
-    private double saldo;
+    private int saldo;
 
-    public Conta(String numero, double saldo) {
-        this.numero = numero;
+    public Conta(int saldo) {
         this.saldo = saldo;
     }
 
-    public String getNumero() {
-        return numero;
+    public void pagaBoleto(int valorAPagar) {
+        validaSaldo(valorAPagar);
+        debita(valorAPagar);
+        enviaCreditoParaEmissor(valorAPagar);
     }
 
-    public double getSaldo() {
-        return saldo;
-    
-}
+    public void validaSaldo(int valorAPagar) {
+        if(valorAPagar > saldo) {
+            throw new IllegalStateException("Saldo insuficiente");
+        }
+    }
+
+    public void debita(int valorAPagar) {
+        this.saldo = this.saldo - valorAPagar;
+    }
+
+    public void enviaCreditoParaEmissor(int valorAPagar) {
+        //envia valor para emissor do boleto
+
+    }
 }
